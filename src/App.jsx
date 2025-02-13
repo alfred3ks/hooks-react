@@ -1,28 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const [color, setColor] = useState('red');
+  const [name, setName] = useState('Alfred');
 
-  const increment = () => {
-    setCount((prev) => {
-      return prev + 1;
-    });
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((prev) => {
+        return prev + 1;
+      });
+    }, 2000);
+  }, [color, name]);
+
+  const changeColor = () => {
+    setColor('blue');
   };
-  const decrement = () => {
-    setCount((prev) => {
-      return prev - 1;
-    });
-  };
-  const reset = () => {
-    setCount(0);
+
+  const changeName = () => {
+    setName('@alfred3ks');
   };
 
   return (
     <>
-      <h1>Count: {count}</h1>
-      <button onClick={increment}>Increment + </button>
-      <button onClick={decrement}>Decrement - </button>
-      <button onClick={reset}>Reset</button>
+      <h1>I´ve rendered {count} times!!</h1>
+      <h2>Color: {color}</h2>
+      <button onClick={changeColor}>Change color</button>
+      <h2>Name: {name}</h2>
+      <button onClick={changeName}>Change name</button>
     </>
   );
 };

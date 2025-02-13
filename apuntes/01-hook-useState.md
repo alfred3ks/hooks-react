@@ -7,7 +7,7 @@ El estado es una variable que React monitoriza. Cuando cambia su valor, React vu
 
 ### Veamos un ejemplo:
 
-Para este ejmeplo vamos a usar el hook de React para cambiar el estado del componente cuando se dispara un evento. Para este caso al hacer click en el boron vamos a cambiar el color.
+Para este ejemplo vamos a usar el hook de React para cambiar el estado del componente cuando se dispara un evento. Para este caso al hacer click en el boron vamos a cambiar el color.
 
 ```javascript
 import { useState } from 'react';
