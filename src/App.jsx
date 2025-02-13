@@ -1,33 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [color, setColor] = useState('red');
-  const [name, setName] = useState('Alfred');
+  // Para modificar el elemento del DOM:
+  const inputEment = useRef('');
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCount((prev) => {
-        return prev + 1;
-      });
-    }, 2000);
-  }, [color, name]);
-
-  const changeColor = () => {
-    setColor('blue');
+  const btnClick = () => {
+    console.log(inputEment.current);
+    // Aplicamos la propiedad css al input
+    inputEment.current.style.background = 'red';
   };
 
-  const changeName = () => {
-    setName('@alfred3ks');
+  const incrementCount = () => {
+    setCount((prev) => prev + 1);
   };
 
   return (
     <>
-      <h1>I´ve rendered {count} times!!</h1>
-      <h2>Color: {color}</h2>
-      <button onClick={changeColor}>Change color</button>
-      <h2>Name: {name}</h2>
-      <button onClick={changeName}>Change name</button>
+      <input type="text" ref={inputEment} />
+      <button onClick={btnClick}>Click here</button>
+      <h1>Render count: {count}</h1>
+      <button onClick={incrementCount}>+</button>
     </>
   );
 };
