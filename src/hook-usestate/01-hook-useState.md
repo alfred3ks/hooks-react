@@ -6,9 +6,7 @@ El hook useState en React es una función que permite a los componentes funciona
 
 El estado es una variable que React monitoriza. Cuando cambia su valor, React vuelve a renderizar el componente para reflejar la nueva información en la interfaz.
 
-### Veamos un ejemplo:
-
-Para este ejemplo tenemos un contador:
+### Veamos un ejemplo: tenemos un contador:
 
 ### src/hook-usestate/Counter:
 
@@ -107,7 +105,7 @@ const ChangeData = () => {
 export default ChangeData;
 ```
 
-🔍 Explicación:
+Explicación:
 
 1 - setCar((prev) => {...})
 
