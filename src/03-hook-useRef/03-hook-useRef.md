@@ -1,20 +1,23 @@
 ## Hook useRef:
 
-El hook useRef en React se utiliza para crear referencias mutables a elementos del DOM o valores que persisten entre renderizados sin causar una nueva renderización cuando se actualizan. Es útil para acceder directamente a elementos del DOM, como un <input>, o para mantener valores que no necesitan ser re-renderizados cuando cambian, como un contador o un temporizador.
+El hook useRef en React se utiliza para crear referencias mutables a elementos del DOM o valores que persisten entre renderizados sin causar una nueva renderización cuando se actualizan. Es útil para acceder directamente a elementos del DOM, como un **input**, o para mantener valores que no necesitan ser re-renderizados cuando cambian, como un contador o un temporizador.
 
 La referencia creada por useRef se mantiene constante entre los renderizados, pero a diferencia de useState, actualizarla no provoca un nuevo renderizado del componente.
 
 La sintaxis básica es:
 
 ```javascript
+import { useRef } from 'react';
 const ref = useRef(initialValue);
 ```
 
-- initialValue es el valor inicial de la referencia.
+Vamos a explicar un poco como usarlo:
+
+- initialValue es el valor inicial de la referencia. Normamente veremos que se usa null.
 
 - ref.current es donde se almacena el valor o referencia.
 
-Casos comunes de uso:
+### Casos comunes de uso del hook useRef:
 
 1 - Acceder a elementos del DOM: Usado para manipular o interactuar directamente con un DOM sin necesidad de actualizar el estado o renderizado del componente.
 
@@ -22,22 +25,24 @@ Casos comunes de uso:
 
 En resumen, useRef es un hook que permite referenciar elementos del DOM o valores que necesitan persistir entre renders sin provocar actualizaciones del componente.
 
-Consideraciones para usar este hook:
+### Consideraciones para usar este hook:
 
-useRef se puede usar dentro del componente funcional, pero con algunas consideraciones:
+- useRef se puede usar dentro del componente funcional, pero con algunas consideraciones:
 
-Debe ser llamado en la raíz del componente (como useState o useEffect), no dentro de condicionales, bucles o funciones anidadas.
+- Debe ser llamado en la raíz del componente (como useState o useEffect), no dentro de condicionales, bucles o funciones anidadas.
 
-No causa re-renderizados cuando su valor cambia, por lo que es útil para almacenar valores persistentes sin afectar la UI.
+- No causa re-renderizados cuando su valor cambia, por lo que es útil para almacenar valores persistentes sin afectar la UI.
 
-Es mutable, lo que significa que puedes modificar ref.current sin necesidad de usar setState.
+- Es mutable, lo que significa que puedes modificar ref.current sin necesidad de usar setState.
 
-Vemos un ejemplo:
+### Vemos un ejemplo:
+
+### src/03-hook-useRef/CounterRef:
 
 ```javascript
 import { useRef, useState } from 'react';
 
-const App = () => {
+const CounterRef = () => {
   const [renderCount, setRenderCount] = useState(0); // Estado para renderizar
   const countRef = useRef(0); // Referencia mutable
 
@@ -46,24 +51,26 @@ const App = () => {
     console.log('Valor de countRef:', countRef.current); // Se actualiza pero NO re-renderiza
   };
 
+  const incrementCount = () => {
+    setRenderCount((prev) => prev + 1);
+  };
+
   return (
     <>
       <h1>Render count: {renderCount}</h1>
-      <h2>useRef value (no renderiza): {countRef.current}</h2>
+      <h2>useRef value (No renderiza): {countRef.current}</h2>
       <button onClick={incrementRef}>Increment useRef</button>
-      <button onClick={() => setRenderCount((prev) => prev + 1)}>
-        Force Render
-      </button>
+      <button onClick={incrementCount}>Force Render</button>
     </>
   );
 };
 
-export default App;
+export default CounterRef;
 ```
 
 ¿Qué hace este código?
 
-1 - countRef almacena un número con useRef(0), pero su cambio no provoca un re-render.
+1 - countRef almacena un número con useRef(0), pero su cambio no provoca un re-render del componente.
 
 2 - Cuando se presiona "Increment useRef", se incrementa countRef.current, pero React no vuelve a renderizar el componente. Solo se ve el nuevo valor en la consola.
 
@@ -73,7 +80,9 @@ Conclusión:
 
 useRef permite almacenar valores que persisten entre renderizados sin causar re-render. Es útil cuando queremos mantener un dato sin afectar la actualización del componente.
 
-## Otro ejemplo:
+### Otro ejemplo:
+
+### src/03-hook-useRef/ColorRef:
 
 ```javascript
 import { useRef, useState } from 'react';
